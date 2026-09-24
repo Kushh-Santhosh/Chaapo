@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Chaapo">
+  <title>Chaapo</title>
+  <!--
+    The chaap (stamp) mark: a vermilion impression on warm paper.
+    Geometry only — no text — so `scripts/gen-icons.mjs` can rasterise the exact
+    same mark for the PNG sizes without a font. The tilt and the inner hairline
+    are what make it read as a rubber stamp rather than a generic app tile.
+  -->
+  <rect width="512" height="512" rx="112" fill="#fbf8f3" />
+  <g transform="rotate(-6 256 256)">
+    <rect x="96" y="120" width="320" height="272" rx="40" fill="#d93f2b" />
+    <rect
+      x="120"
+      y="144"
+      width="272"
+      height="224"
+      rx="36"
+      fill="none"
+      stroke="#fbf8f3"
+      stroke-width="8"
+    />
+    <g fill="#fbf8f3">
+      <rect x="160" y="201" width="192" height="18" />
+      <rect x="160" y="247" width="192" height="18" />
+      <rect x="160" y="293" width="192" height="18" />
+    </g>
+  </g>
+</svg>

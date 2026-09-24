@@ -1,0 +1,19 @@
+[
+  {
+    "id": "01a06778-f9d6-7570-9cd3-a23feeac267a",
+    "orderNumber": "CHP-DEHT-YBS1",
+    "totalPaise": "250",
+    "shopId": "shop-1",
+    "customerUserId": "customer-shop-flow",
+    "fileIds": [
+      "01a06778-f9d6-7c86-8fc6-e0a3cd3bae15"
+    ],
+    "state": "settled",
+    "createdAt": "2026-09-03T13:32:56.662Z",
+    "updatedAt": "2026-09-03T13:32:56.664Z",
+    "paymentStatus": "captured",
+    "paymentProvider": "mock",
+    "providerPaymentId": "mock-payment-01a06778-f9d6-7570-9cd3-a23feeac267a",
+    "paymentAttempt": 1
+  }
+]

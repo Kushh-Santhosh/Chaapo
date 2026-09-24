@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "chaapo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:sandbox"],
+      "port": 3100,
+      "autoPort": false
+    },
+    {
+      "name": "avara",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/kushal/Desktop/AVARA OFFICE", "start"],
+      "port": 4188,
+      "autoPort": true
+    }
+  ]
+}

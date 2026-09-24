@@ -1,0 +1,55 @@
+{
+  "name": "Chaapo — Print without the queue",
+  "short_name": "Chaapo",
+  "description": "Send your print job to a verified shop near you, pay online, and collect when it says Ready.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf8f3",
+  "theme_color": "#fbf8f3",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["productivity", "shopping", "utilities"],
+  "icons": [
+    {
+      "src": "/brand/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New print order",
+      "short_name": "New order",
+      "url": "/order/new",
+      "description": "Pick a shop and upload files"
+    },
+    {
+      "name": "My orders",
+      "short_name": "Orders",
+      "url": "/orders",
+      "description": "Track an order and show your pickup code"
+    }
+  ]
+}

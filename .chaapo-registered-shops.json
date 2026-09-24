@@ -1,0 +1,230 @@
+[
+  {
+    "id": "01a06773-9c9b-79bc-8721-72c3efe63412",
+    "slug": "browser-test-prints",
+    "name": "Browser Test Prints",
+    "tagline": "Local printing, ready when you are",
+    "about": "A real browser registered print shop.",
+    "localityName": "Kothrud",
+    "cityName": "Pune",
+    "addressLine1": "22 Test Street",
+    "addressLine2": null,
+    "landmark": null,
+    "pincode": "411038",
+    "latitude": 18.5204,
+    "longitude": 73.8567,
+    "ratingAvgCenti": null,
+    "ratingCount": 0,
+    "ordersCompleted": 0,
+    "medianReadyMinutes": null,
+    "defaultTurnaroundMinutes": 30,
+    "acceptWindowMinutes": 10,
+    "pickupGraceHours": 48,
+    "minOrderValuePaise": "0",
+    "maxPagesPerOrder": 1000,
+    "maxFilesPerOrder": 20,
+    "contactPhoneMasked": "•••••••••3210",
+    "fromPrice": {
+      "pricePaise": "200",
+      "unit": "page",
+      "label": "B&W A4"
+    },
+    "capabilities": {
+      "paperSizes": [
+        "a4"
+      ],
+      "colour": true,
+      "bw": true,
+      "duplex": true,
+      "finishings": [
+        "spiral",
+        "lamination"
+      ],
+      "cardStock": false,
+      "photoPaper": false,
+      "largeFormat": false,
+      "scanning": true,
+      "printerCount": 1
+    },
+    "hours": [
+      [
+        {
+          "open": 600,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 600,
+          "close": 1320
+        }
+      ]
+    ],
+    "pausedUntil": null,
+    "pauseReason": null,
+    "photoKey": null,
+    "photoKeys": [],
+    "verifiedAt": "2026-09-03T13:27:05.117Z",
+    "priceList": [
+      {
+        "heading": "Printing",
+        "items": [
+          {
+            "code": "print_bw_a4",
+            "label": "Black & white",
+            "qualifier": "A4 · one side",
+            "pricePaise": "200",
+            "unit": "page",
+            "tiers": []
+          }
+        ]
+      }
+    ],
+    "recentReviews": [],
+    "closures": []
+  },
+  {
+    "id": "01a06773-f741-7ea8-9edb-e21119764bea",
+    "slug": "browser-test-prints-2",
+    "name": "Browser Test Prints 2",
+    "tagline": "Local printing, ready when you are",
+    "about": "A real browser registered print shop.",
+    "localityName": "Kothrud",
+    "cityName": "Pune",
+    "addressLine1": "22 Test Street",
+    "addressLine2": null,
+    "landmark": null,
+    "pincode": "411038",
+    "latitude": 18.5204,
+    "longitude": 73.8567,
+    "ratingAvgCenti": null,
+    "ratingCount": 0,
+    "ordersCompleted": 0,
+    "medianReadyMinutes": null,
+    "defaultTurnaroundMinutes": 30,
+    "acceptWindowMinutes": 10,
+    "pickupGraceHours": 48,
+    "minOrderValuePaise": "0",
+    "maxPagesPerOrder": 1000,
+    "maxFilesPerOrder": 20,
+    "contactPhoneMasked": "•••••••••3211",
+    "fromPrice": {
+      "pricePaise": "200",
+      "unit": "page",
+      "label": "B&W A4"
+    },
+    "capabilities": {
+      "paperSizes": [
+        "a4"
+      ],
+      "colour": true,
+      "bw": true,
+      "duplex": true,
+      "finishings": [
+        "spiral",
+        "lamination"
+      ],
+      "cardStock": false,
+      "photoPaper": false,
+      "largeFormat": false,
+      "scanning": true,
+      "printerCount": 1
+    },
+    "hours": [
+      [
+        {
+          "open": 600,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 510,
+          "close": 1320
+        }
+      ],
+      [
+        {
+          "open": 600,
+          "close": 1320
+        }
+      ]
+    ],
+    "pausedUntil": null,
+    "pauseReason": null,
+    "photoKey": null,
+    "photoKeys": [],
+    "verifiedAt": "2026-09-03T13:27:28.322Z",
+    "priceList": [
+      {
+        "heading": "Printing",
+        "items": [
+          {
+            "code": "print_bw_a4",
+            "label": "Black & white",
+            "qualifier": "A4 · one side",
+            "pricePaise": "200",
+            "unit": "page",
+            "tiers": []
+          }
+        ]
+      }
+    ],
+    "recentReviews": [],
+    "closures": []
+  }
+]

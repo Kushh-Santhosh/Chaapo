@@ -1,0 +1,469 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Chaapo design system — "ink on paper"
+
+   The product is about paper. The interface is warm off-white stock, near-black
+   ink, hairline rules, and one saturated stamp-red that only ever marks the
+   thing you are meant to act on. Typography does the work: an editorial serif
+   for headlines, a neutral grotesque for interface text, and a mono with
+   tabular numerals for money, codes and counts — because a pickup code that
+   shifts width as it animates looks broken.
+
+   Rules that keep it fast (NFR-01, NFR-05):
+   • Blur is used in exactly two places: the sticky top bar and the sticky action
+     bar. Both are small, fixed-size layers. Never blur a scrolling list.
+   • Claymorphism is reserved for the primary action surface and the pickup-code
+     card. It is a shadow recipe, not a gradient wash.
+   • Motion is 150–220 ms, opacity + small transform only. No layout animation.
+   • Everything below is a CSS variable, so a dark theme is a contained change
+     later — we deliberately ship one theme done properly rather than two
+     half-checked ones.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Surfaces ───────────────────────────────────────────────────────────── */
+  --color-paper: #fbf8f3; /* app background — warm stock            */
+  --color-paper-raised: #ffffff; /* cards, sheets                          */
+  --color-paper-sunk: #f3eee5; /* wells, table headers, code fields      */
+  --color-paper-shade: #ebe4d7; /* pressed states, skeletons              */
+
+  /* ── Ink ────────────────────────────────────────────────────────────────── */
+  --color-ink: #12131a; /* primary text                           */
+  --color-ink-2: #3a3b45; /* secondary text                         */
+  --color-ink-3: #6b6c78; /* muted, meta, placeholders              */
+  --color-ink-4: #9c9daa; /* disabled                               */
+  --color-rule: #e4ddd0; /* hairline borders                       */
+  --color-rule-strong: #d3c9b6;
+
+  /* ── Chaap red — the stamp ──────────────────────────────────────────────── */
+  --color-chaap: #d93f2b;
+  --color-chaap-deep: #b32e1d;
+  --color-chaap-press: #972415;
+  --color-chaap-tint: #fdeeea;
+  --color-chaap-edge: #f4c9c1;
+
+  /* ── Status ─────────────────────────────────────────────────────────────── */
+  --color-success: #1f7a4d;
+  --color-success-tint: #e8f5ee;
+  --color-success-edge: #b9dfca;
+  --color-warn: #a86a00;
+  --color-warn-tint: #fdf2df;
+  --color-warn-edge: #f0d9a8;
+  --color-danger: #c0271a;
+  --color-danger-tint: #fdecea;
+  --color-danger-edge: #f2c4bf;
+  --color-info: #23538f;
+  --color-info-tint: #eaf1fa;
+  --color-info-edge: #bed3ea;
+  --color-neutral-tint: #f1efe9;
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-2xs: 0.6875rem; /* 11px — legal, table meta   */
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.8125rem; /* 13px — dense dashboard UI  */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem; /* 15px — mobile body         */
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.0625rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.9rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+
+  /* Editorial display sizes — fluid, used sparingly */
+  --text-display-sm: clamp(1.75rem, 3.2vw, 2.25rem);
+  --text-display-sm--line-height: 1.1;
+  --text-display: clamp(2.125rem, 5vw, 3rem);
+  --text-display--line-height: 1.05;
+  --text-display-lg: clamp(2.625rem, 7vw, 4.25rem);
+  --text-display-lg--line-height: 1;
+
+  /* ── Radii ──────────────────────────────────────────────────────────────── */
+  --radius-xs: 5px;
+  --radius-sm: 7px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 26px;
+  --radius-clay: 22px;
+
+  /* ── Elevation ──────────────────────────────────────────────────────────── */
+  --shadow-hair: 0 0 0 1px color-mix(in oklab, var(--color-ink) 8%, transparent);
+  --shadow-card:
+    0 1px 2px color-mix(in oklab, var(--color-ink) 4%, transparent),
+    0 10px 28px -18px color-mix(in oklab, var(--color-ink) 22%, transparent);
+  --shadow-lift:
+    0 2px 4px color-mix(in oklab, var(--color-ink) 5%, transparent),
+    0 18px 44px -22px color-mix(in oklab, var(--color-ink) 28%, transparent);
+  --shadow-sheet: 0 -8px 48px -16px color-mix(in oklab, var(--color-ink) 22%, transparent);
+  --shadow-inset-well: inset 0 1px 2px color-mix(in oklab, var(--color-ink) 6%, transparent);
+
+  /* ── Motion ─────────────────────────────────────────────────────────────── */
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+
+  /* ── Layout ─────────────────────────────────────────────────────────────── */
+  --container-content: 60rem;
+  --container-wide: 84rem;
+  --spacing-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* ── Animations ─────────────────────────────────────────────────────────── */
+  --animate-rise: rise var(--duration-base) var(--ease-out-soft) both;
+  --animate-fade: fade var(--duration-fast) var(--ease-out-soft) both;
+  --animate-sheet-in: sheet-in var(--duration-slow) var(--ease-out-soft) both;
+  --animate-pulse-soft: pulse-soft 1.6s var(--ease-in-out-soft) infinite;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-stamp: stamp 260ms var(--ease-out-soft) both;
+  --animate-spin-slow: spin 900ms linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: -160% 0;
+  }
+  to {
+    background-position: 260% 0;
+  }
+}
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.12) rotate(-3deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.98) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-1.5deg);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Prevents the iOS rubber-band from revealing white beneath the paper. */
+    background-color: var(--color-paper);
+  }
+
+  /*
+   * DEVELOPMENT / CI ONLY. Applied by src/app/fonts.offline.ts on a build machine with
+   * no egress to fonts.googleapis.com. Needed as a real rule because an undefined
+   * custom property invalidates the whole `font-family` declaration rather than falling
+   * through to the next name in the list.
+   */
+  html.fonts-offline {
+    --font-instrument-serif: ui-serif;
+    --font-inter: system-ui;
+    --font-plex-mono: ui-monospace;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* Money, page counts, codes and timestamps must not reflow as they change. */
+  :where(td, th, .tabular, [data-numeric]) {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background: var(--color-chaap-tint);
+    color: var(--color-chaap-press);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-chaap);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Native controls inherit the paper palette. */
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-ink-4);
+  }
+
+  /* Hide the number-input spinners: quantities use explicit steppers. */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    appearance: textfield;
+  }
+
+  /* Scrollbars: thin and inked, not chrome-grey. */
+  @supports selector(::-webkit-scrollbar) {
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-rule-strong);
+      border: 3px solid var(--color-paper);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-ink-4);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Print styles matter here: shops print the job ticket, customers print the
+     invoice and the pickup slip. */
+  @media print {
+    body {
+      background: #fff;
+      color: #000;
+    }
+    [data-print='hide'] {
+      display: none !important;
+    }
+    [data-print='break-before'] {
+      break-before: page;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Utilities
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Selective glass — sticky top bar and sticky action bar only. Fixed-size
+   layers, so the blur cost is bounded and does not scale with content. */
+@utility glass {
+  background-color: color-mix(in oklab, var(--color-paper) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+}
+
+@utility glass-raised {
+  background-color: color-mix(in oklab, var(--color-paper-raised) 84%, transparent);
+  backdrop-filter: saturate(1.3) blur(16px);
+  -webkit-backdrop-filter: saturate(1.3) blur(16px);
+}
+
+/* Selective clay — primary action surface and the pickup-code card. A shadow
+   recipe (outer lift + inner top highlight + inner bottom shade), not a
+   gradient wash. */
+@utility clay {
+  background-color: var(--color-paper-raised);
+  box-shadow:
+    0 1px 1px color-mix(in oklab, var(--color-ink) 4%, transparent),
+    0 12px 30px -18px color-mix(in oklab, var(--color-ink) 30%, transparent),
+    inset 0 1.5px 0 color-mix(in oklab, #fff 90%, transparent),
+    inset 0 -2px 0 color-mix(in oklab, var(--color-ink) 5%, transparent);
+}
+
+@utility clay-chaap {
+  background-color: var(--color-chaap);
+  color: #fff;
+  box-shadow:
+    0 1px 1px color-mix(in oklab, var(--color-chaap-press) 30%, transparent),
+    0 12px 26px -16px color-mix(in oklab, var(--color-chaap-press) 55%, transparent),
+    inset 0 1.5px 0 color-mix(in oklab, #fff 32%, transparent),
+    inset 0 -2px 0 color-mix(in oklab, var(--color-chaap-press) 45%, transparent);
+}
+
+/* A 1px rule that survives fractional device pixel ratios. */
+@utility hairline {
+  box-shadow: 0 0 0 1px var(--color-rule);
+}
+
+/* Editorial small-caps label used for section eyebrows and table headers. */
+@utility eyebrow {
+  font-size: var(--text-2xs);
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-ink-3);
+}
+
+@utility display-tight {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+}
+
+/* Bento grid: dense, aligned, and collapses to a single column on mobile.
+   Children opt into spans with col-span-* / row-span-*. */
+@utility bento {
+  display: grid;
+  gap: --spacing(3);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  @media (width >= 40rem) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: --spacing(4);
+  }
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Skeleton shimmer for loading states. */
+@utility skeleton {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-paper-sunk) 30%,
+    var(--color-paper-shade) 50%,
+    var(--color-paper-sunk) 70%
+  );
+  background-size: 260% 100%;
+  animation: var(--animate-shimmer);
+  border-radius: var(--radius-sm);
+}
+
+/* The stamped "paid" / "ready" mark. */
+@utility stamp {
+  font-family: var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-xs);
+  animation: var(--animate-stamp);
+}
+
+/* Respect the iOS home indicator on sticky bottom bars. */
+@utility pb-safe {
+  padding-bottom: calc(--spacing(3) + env(safe-area-inset-bottom, 0px));
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.leaflet-container {
+  background: #f4efe8;
+  font: inherit;
+}
+
+.leaflet-control-attribution {
+  background: rgba(251, 248, 243, 0.9) !important;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  color: var(--color-ink-3);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-paper-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.leaflet-popup-content {
+  margin: 0.75rem 0.9rem;
+}
